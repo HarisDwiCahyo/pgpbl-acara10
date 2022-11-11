@@ -91,45 +91,7 @@
         );
         basemap.addTo(map);
 
-        /* GeoJSON Point */
-        var geojson = L.geoJson(null, {
-            pointToLayer: function(feature, latlng) {
-                return L.marker(latlng, {
-                    icon: L.icon({
-                        iconUrl: "<?= base_url('/img/dog.png') ?>",
-                        iconSize: [30, 30],
-                        iconAnchor: [15, 30],
-                        popupAnchor: [0, -30],
-                    }),
-                });
-            },
-            onEachFeature: function(feature, layer) {
-                /* Variabel content untuk memanggil atribut dari data file geojson */
-                var content = "Nama : " + feature.properties.nama + "<br>" +
-                    "Deskripsi : " + feature.properties.deskripsi + "<br>" +
-                    "<img src='<?= base_url('upload/foto/') ?>" + feature.properties.foto + "' width='100px' height='100px'>"
-
-                layer.on({
-                    click: function(e) { //Fungsi ketika icon simbol di-klik
-                        geojson.bindPopup(content);
-                    },
-
-                    mouseover: function(e) {
-                        geojson.bindTooltip(feature.properties.nama, {
-                            sticky: true
-                        });
-                    },
-
-                    mouseout: function(e) {
-                        geojson.closePopup();
-                    }
-                });
-            },
-        });
-        $.getJSON("http://localhost/pgwl/petalokasiobjek/public/api", function(data) {
-            geojson.addData(data);
-            map.addLayer(geojson);
-        });
+        
     </script>
 </body>
 
